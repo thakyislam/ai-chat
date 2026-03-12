@@ -7,7 +7,7 @@ from django.conf import settings
 # Create your views here.
 
 
-openai_key = settings.OPENAI_API_KEY
+GEMINI_API_KEY = settings.GEMINI_API_KEY
 
 @login_required
 def home(request):
