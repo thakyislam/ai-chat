@@ -85,12 +85,14 @@
     <body>
         <div class="container">
             <!-- Sidebar -->
-            <div class="sidebar">
-                <h3>+ New Prompt</h3>
-                <a href="#">Prompt 1</a>
-                <a href="#">Prompt 2</a>
-                <a href="#">....</a>
-                <hr />
+    <div class="sidebar">
+    <h3>+ New Prompt</h3>
+    {% for p in prompts %}
+        <a href="{% url 'prompt_detail' p.id %}">{{ p.prompt_text|truncatechars:28 }}</a>
+    {% empty %}
+        <span style="font-size:13px; color:#aaa;">No prompts yet</span>
+    {% endfor %}
+    <hr />
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <button
@@ -109,7 +111,7 @@
 
                     <form method="post" action="{% url 'home' %}">
                         {% csrf_token %}
-                        <textarea name="prompt" placeholder="Type your prompt here..." required></textarea>
+                        <textarea name="prompt" placeholder="Type your prompt here..." required>{{ prompt }}</textarea>
 
                         <label style="margin-top: 15px; display: block"> Select task type </label>
 
