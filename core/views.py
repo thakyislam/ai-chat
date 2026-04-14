@@ -6,6 +6,8 @@ from django.shortcuts import render,redirect
 from django.conf import settings
 from google import genai
 import anthropic
+import httpx
+import certifi
 
 # Create your views here.
 
@@ -52,7 +54,10 @@ def dress_suggestion(request):
         event_description = request.POST.get('event_description', '').strip()
         if event_description:
             try:
-                client = anthropic.Anthropic(api_key=settings.CLAUDE_API_KEY)
+                client = anthropic.Anthropic(
+                    api_key=settings.CLAUDE_API_KEY,
+                    http_client=httpx.Client(verify=certifi.where()),
+                )
                 with client.messages.stream(
                     model="claude-opus-4-6",
                     max_tokens=1024,
