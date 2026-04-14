@@ -26,6 +26,7 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 GEMINI_API_KEY = env('GEMINI_API_KEY')
+CLAUDE_API_KEY = env('CLAUDE_API_KEY')
 
 
 ALLOWED_HOSTS = []
